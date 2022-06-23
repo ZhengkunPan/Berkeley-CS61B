@@ -6,7 +6,7 @@ public class Planet {
 	public double mass;
 	public String imgFileName;
 
-	final static double gravity = 6.67e-11;
+	private final static double gravity = 6.67e-11;
 
 	/** Constructor of Planet class*/
 	public Planet(double xP, double yP, double xV,
@@ -83,7 +83,7 @@ public class Planet {
 	}
 
 	/** Compares two planets*/
-	public boolean equal(Planet p) {
+	private boolean equal(Planet p) {
 		if (this.xxPos == p.xxPos &&
 			this.yyPos == p.yyPos &&
 			this.xxVel == p.xxVel &&

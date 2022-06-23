@@ -14,6 +14,7 @@ public class NBody {
 		int numberPlanets = in.readInt();
 		double secondItemInFile = in.readDouble();
 		Planet[] planetArray = new Planet[numberPlanets];
+		int index = 0;
 		while (numberPlanets > 0) {
 			double xPos = in.readDouble();
 			double yPos = in.readDouble();
@@ -21,8 +22,9 @@ public class NBody {
 			double yVel = in.readDouble();
 			double mass = in.readDouble();
 			String planetName = in.readString();
+			planetArray[index] = new Planet(xPos, yPos, xVel, yVel, mass, planetName);
 			numberPlanets -= 1;
-			planetArray[numberPlanets] = new Planet(xPos, yPos, xVel, yVel, mass, planetName);
+			index += 1;
 		}
 		return planetArray;
 	}
