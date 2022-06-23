@@ -105,6 +105,13 @@ public class Planet {
 		yyPos = (yyPos + duration * yyVel);
 	}
 
+	/** Draws the planet at given position*/
+	public void draw() {
+		String address = "images/" + imgFileName;
+		StdDraw.picture(xxPos, yyPos, address);
+		StdDraw.show();
+	}
+
 }
 
 
