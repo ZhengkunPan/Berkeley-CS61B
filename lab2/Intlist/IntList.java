@@ -51,7 +51,11 @@ public class IntList {
         if (L == null) {
             return null;
         }
+
+        /* creates a new IntList and points to the first */
         IntList res = new IntList(L.first * L.first, null);
+
+        /* current pointer*/
         IntList ptr = res;
         L = L.rest;
         while (L != null) {
@@ -59,6 +63,8 @@ public class IntList {
             L = L.rest;
             ptr = ptr.rest;
         }
+
+        /* changed res*/
         return res;
     }
 
@@ -81,8 +87,21 @@ public class IntList {
      */
 
     public static IntList dcatenate(IntList A, IntList B) {
-        //TODO:  fill in method
-        return null;
+        IntList pt = A;
+        if (A == null) {
+            A = B;
+            return A;
+        }
+
+        while (pt != null) {
+            pt = pt.rest;
+            if (pt.rest == null) {
+                pt.rest = B;
+                break;
+            }
+        }
+
+        return A;
     }
 
     /**
@@ -90,24 +109,24 @@ public class IntList {
      * * elements of B.  May NOT modify items of A.  Use 'new'.
      */
     public static IntList catenate(IntList A, IntList B) {
-        //TODO:  fill in method
-        return null;
+        if (A == null) {
+            A = B;
+            return A;
+        }
+
+        IntList C = A.rest;
+        IntList AB = new IntList(A.first, null);
+        IntList pt = AB;
+
+        while (C != null) {
+            pt.rest = new IntList(C.first, null );
+            C = C.rest;
+            pt = pt.rest;
+        }
+
+        pt.rest = B;
+        return AB;
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     /**
      * DO NOT MODIFY ANYTHING BELOW THIS LINE! Many of the concepts below here
