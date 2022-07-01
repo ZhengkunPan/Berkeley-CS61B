@@ -100,6 +100,7 @@ public class LinkedListDeque<T> {
     }
 
     /** Gets the item at the given index recursively*/
+    /*
     public T getRecursive(int index) {
         if (index == 0) {
             return item;
@@ -107,4 +108,5 @@ public class LinkedListDeque<T> {
         index -= 1;
         return sentinel.next.getRecursive(index);
     }
+    */
 }
