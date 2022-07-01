@@ -66,23 +66,23 @@ public class LinkedListDeque<T> {
 
     /** Removes and returns the item at the front of the deque. If no such item exists, returns null.*/
     public T removeFirst() {
-        if (get(0) == null) {
-            return null;
-        } else {
-            T first = get(0);
-            sentinel.next = sentinel.next.next;
-            sentinel.next.previous = sentinel;
-            size -= 1;
-            return first;
+       if (sentinel.next == null) {
+           return null;
+       } else {
+           T first = (T) sentinel.next;
+           sentinel.next = sentinel.next.next;
+           sentinel.next.previous = sentinel;
+           size -= 1;
+           return first;
         }
     }
 
     /** Removes and returns the item at the back of the deque. If no such item exists, returns null.*/
     public T removeLast() {
-        if (get(size) == null) {
+        if (sentinel.previous == null) {
             return null;
         } else {
-            T last = get(size);
+            T last = (T) sentinel.previous;
             sentinel.previous = sentinel.previous.previous;
             sentinel.previous.next = sentinel;
             size -= 1;
