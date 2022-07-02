@@ -5,15 +5,13 @@ public class LinkedListDeque<T> {
         public TNode next;
         public TNode previous;
 
-        public TNode() {
-            next = null;
-            previous = null;
-        }
+        public TNode() {}
         public TNode(T i, TNode p, TNode n) {
             item = i;
             previous = p;
             next = n;
         }
+
     }
     private TNode sentinel;
     private int size;
@@ -21,8 +19,8 @@ public class LinkedListDeque<T> {
     /** Creates an empty LinkedListDeque.*/
     public LinkedListDeque() {
         sentinel = new TNode();
-        sentinel.next = sentinel;
         sentinel.previous = sentinel;
+        sentinel.next = sentinel;
         size = 0;
     }
 
