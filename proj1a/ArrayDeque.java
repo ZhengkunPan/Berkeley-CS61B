@@ -52,22 +52,24 @@ public class ArrayDeque<T> {
         System.out.println("");
     }
 
-    /** Removes and returns the item at the front of the deque. If no such item exists, returns null.*/
+    /** Removes and returns the item at the front of the deque.
+     * If no such item exists, returns null.*/
     public T removeFirst() {
         firstIndex = addOne(firstIndex);
-        T firstItem = items[firstIndex+1];
-        items[firstIndex+1] = null;
+        T firstItem = items[firstIndex + 1];
+        items[firstIndex + 1] = null;
         firstIndex += 1;
         size -= 1;
         decSize();
         return firstItem;
     }
 
-    /** Removes and returns the item at the back of the deque. If no such item exists, returns null.*/
+    /** Removes and returns the item at the back of the deque.
+     * If no such item exists, returns null.*/
     public T removeLast() {
         lastIndex = minusOne(lastIndex);
-        T lastItem = items[lastIndex-1];
-        items[lastIndex-1] = null;
+        T lastItem = items[lastIndex - 1];
+        items[lastIndex - 1] = null;
         lastIndex -= 1;
         size -= 1;
         decSize();
@@ -82,11 +84,13 @@ public class ArrayDeque<T> {
     /** Increases array size.*/
     public void incSize() {
         if (size == items.length) {
-            T[] newArr = (T[]) new Object[size*4];
-            if (firstIndex-1 == lastIndex) {
-                System.arraycopy(items, 0, newArr, 0, lastIndex);
-                System.arraycopy(items, lastIndex, newArr, newArr.length-size+lastIndex, size-lastIndex);
-                lastIndex = newArr.length-size+lastIndex;
+            T[] newArr = (T[]) new Object[size * 4];
+            if (firstIndex - 1 == lastIndex) {
+                System.arraycopy(items, 0,
+                        newArr, 0, lastIndex);
+                System.arraycopy(items, lastIndex,
+                        newArr, newArr.length - size + lastIndex, size - lastIndex);
+                lastIndex = newArr.length - size + lastIndex;
             } else {
                 System.arraycopy(items, addOne(firstIndex), newArr, addOne(firstIndex), size);
             }
@@ -97,13 +101,14 @@ public class ArrayDeque<T> {
     /** Decreases array size*/
     public void decSize() {
         if (size <= 0.25) {
-            T[] newArr = (T[]) new Object[items.length/2];
-            if (items[0] == null || items[size-1] == null) {
+            T[] newArr = (T[]) new Object[items.length / 2];
+            if (items[0] == null || items[size - 1] == null) {
                 System.arraycopy(items, addOne(firstIndex), newArr, addOne(firstIndex), size);
             } else {
                 System.arraycopy(items, 0, newArr, 0, minusOne(firstIndex));
-                System.arraycopy(items, addOne(lastIndex), newArr, newArr.length-size+lastIndex, size-lastIndex);
-                lastIndex = newArr.length-size+lastIndex;
+                System.arraycopy(items, addOne(lastIndex), newArr,
+                        newArr.length - size + lastIndex, size - lastIndex);
+                lastIndex = newArr.length - size + lastIndex;
             }
         }
     }
@@ -111,18 +116,18 @@ public class ArrayDeque<T> {
     /** Minus one on index.*/
     public int minusOne(int index) {
         if (index == 0) {
-            return size-1;
+            return size - 1;
         } else {
-            return index-1;
+            return index - 1;
         }
     }
 
     /** Adds one on index.*/
     public int addOne(int index) {
-        if (index == size-1) {
+        if (index == size - 1) {
             return 0;
         } else {
-            return index+1;
+            return index + 1;
         }
     }
 }
