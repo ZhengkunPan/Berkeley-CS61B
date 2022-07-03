@@ -1,34 +1,37 @@
 public class ArrayDeque<T> {
-    private int size;
+
     private T[] items;
-    private int prevIndex;
-    private int nextIndex;
+    private int size;
+    private int firstIndex;
+    private int lastIndex;
 
     /** Creates an empty array deque.*/
     public ArrayDeque() {
         items = (T[]) new Object[8];
-        prevIndex = 0;
-        nextIndex = 1;
         size = 0;
+        firstIndex = 4;
+        lastIndex = 5;
     }
 
     /** Adds an item of type T to the front of the deque.*/
     public void addFirst(T item) {
-        items[prevIndex] = item;
-        prevIndex -= 1;
+        items[firstIndex] = item;
+        firstIndex = minusOne(firstIndex);
         size += 1;
+        incSize();
     }
 
-    /** Adds an item of type T to the back of the deque.*/
+    /**  Adds an item of type T to the back of the deque.*/
     public void addLast(T item) {
-        items[nextIndex] = item;
-        nextIndex += 1;
+        items[lastIndex] = item;
+        lastIndex = addOne(lastIndex);
         size += 1;
+        incSize();
     }
 
     /** Returns true if deque is empty, false otherwise.*/
     public boolean isEmpty() {
-        if (size() == 0) {
+        if (size == 0) {
             return true;
         }
         return false;
@@ -41,53 +44,85 @@ public class ArrayDeque<T> {
 
     /** Prints the items in the deque from first to last, separated by a space.*/
     public void printDeque() {
-        for (int i = 0; i < items.length; i += 1) {
-            System.out.print(" " + items[i]);
+        int ptr = 0;
+        while (ptr < size) {
+            System.out.print(items[ptr] + " ");
+            ptr += 1;
         }
         System.out.println("");
     }
 
     /** Removes and returns the item at the front of the deque. If no such item exists, returns null.*/
     public T removeFirst() {
-        items[prevIndex+1] = null;
-        prevIndex += 1;
+        firstIndex = addOne(firstIndex);
+        T firstItem = items[firstIndex+1];
+        items[firstIndex+1] = null;
+        firstIndex += 1;
         size -= 1;
+        decSize();
+        return firstItem;
     }
 
     /** Removes and returns the item at the back of the deque. If no such item exists, returns null.*/
     public T removeLast() {
-        items[nextIndex-1] = null;
-        nextIndex -= 1;
+        lastIndex = minusOne(lastIndex);
+        T lastItem = items[lastIndex-1];
+        items[lastIndex-1] = null;
+        lastIndex -= 1;
         size -= 1;
+        decSize();
+        return lastItem;
     }
 
     /** Gets the item at the given index.*/
     public T get(int index) {
-        return items[index];
+        return items[(index + firstIndex + 1) % items.length];
     }
 
-    /** Calculates the index*/
-    public int calcIndex(int index) {
-        if (index < 0) {
-            return  items.length - 1;
+    /** Increases array size.*/
+    public void incSize() {
+        if (size == items.length) {
+            T[] newArr = (T[]) new Object[size*4];
+            if (firstIndex-1 == lastIndex) {
+                System.arraycopy(items, 0, newArr, 0, lastIndex);
+                System.arraycopy(items, lastIndex, newArr, newArr.length-size+lastIndex, size-lastIndex);
+                lastIndex = newArr.length-size+lastIndex;
+            } else {
+                System.arraycopy(items, addOne(firstIndex), newArr, addOne(firstIndex), size);
+            }
+            items = newArr;
         }
+    }
 
-        if (index >= items.length) {
+    /** Decreases array size*/
+    public void decSize() {
+        if (size <= 0.25) {
+            T[] newArr = (T[]) new Object[items.length/2];
+            if (items[0] == null || items[size-1] == null) {
+                System.arraycopy(items, addOne(firstIndex), newArr, addOne(firstIndex), size);
+            } else {
+                System.arraycopy(items, 0, newArr, 0, minusOne(firstIndex));
+                System.arraycopy(items, addOne(lastIndex), newArr, newArr.length-size+lastIndex, size-lastIndex);
+                lastIndex = newArr.length-size+lastIndex;
+            }
+        }
+    }
+
+    /** Minus one on index.*/
+    public int minusOne(int index) {
+        if (index == 0) {
+            return size-1;
+        } else {
+            return index-1;
+        }
+    }
+
+    /** Adds one on index.*/
+    public int addOne(int index) {
+        if (index == size-1) {
             return 0;
+        } else {
+            return index+1;
         }
-
-        return index;
     }
-
-    /** Determines if array needs to be resized*/
-    public boolean deterResize() {
-        return (float) size / items.length >= 0.25;
-    }
-
-    /** Resizes the array.*/
-    public void resize(int capacity) {
-        T[] newArr = (T[]) new Object[size*4];
-
-    }
-
 }
