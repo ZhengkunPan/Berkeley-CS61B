@@ -106,17 +106,23 @@ public class ArrayDeque<T> {
 
     /** Decreases array size*/
     private void decSize() {
+        if (size == 0) {
+            new ArrayDeque();
+            return;
+        }
         if (size <= 0.25) {
             T[] newArr = (T[]) new Object[items.length / 2];
             if (items[0] == null || items[size - 1] == null) {
-                System.arraycopy(items, addOne(firstIndex), newArr, addOne(firstIndex), size);
+                System.arraycopy(items, addOne(firstIndex), newArr, addOne(firstIndex), lastIndex - firstIndex - 1);
             } else {
                 System.arraycopy(items, 0, newArr, 0, lastIndex);
                 System.arraycopy(items, addOne(firstIndex), newArr,
                         newArr.length - items.length + firstIndex, items.length - firstIndex - 1);
                 firstIndex = newArr.length - items.length + firstIndex - 1;
             }
+            items = newArr;
         }
+
     }
 
     /** Minus one on index.*/
@@ -141,14 +147,7 @@ public class ArrayDeque<T> {
         ArrayDeque array = new ArrayDeque();
         array.addFirst(1);
         array.addFirst(2);
-        array.addFirst(3);
-        array.addFirst(4);
-        array.addFirst(5);
-        array.addLast(10);
-        array.addLast(10);
-        array.addLast(10);
-        array.addLast(10);
-        array.addLast(10);
-
+        array.removeFirst();
+        array.removeFirst();
     }
 }
