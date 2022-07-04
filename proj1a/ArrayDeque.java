@@ -144,19 +144,4 @@ public class ArrayDeque<T> {
             return index + 1;
         }
     }
-
-    public static void main(String args []) {
-        ArrayDeque arr = new ArrayDeque();
-        arr.addFirst(0);
-        arr.addFirst(1);
-        arr.addFirst(2);
-        arr.removeFirst();
-        arr.addFirst(4);
-        arr.removeFirst();
-        arr.addFirst(6);
-        arr.addFirst(7);
-        arr.addFirst(8);
-        arr.removeFirst();
-
-    }
 }
