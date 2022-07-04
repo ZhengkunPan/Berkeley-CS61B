@@ -85,12 +85,12 @@ public class ArrayDeque<T> {
     private void incSize() {
         if (size == items.length) {
             T[] newArr = (T[]) new Object[size * 4];
-            if (firstIndex - 1 == lastIndex) {
+            if (firstIndex + 1 == lastIndex) {
                 System.arraycopy(items, 0,
                         newArr, 0, lastIndex);
                 System.arraycopy(items, lastIndex,
                         newArr, newArr.length - size + lastIndex, size - lastIndex);
-                lastIndex = newArr.length - size + lastIndex;
+                lastIndex = newArr.length - size + lastIndex - 1;
             } else {
                 System.arraycopy(items, addOne(firstIndex), newArr, addOne(firstIndex), size);
             }
@@ -105,10 +105,10 @@ public class ArrayDeque<T> {
             if (items[0] == null || items[size - 1] == null) {
                 System.arraycopy(items, addOne(firstIndex), newArr, addOne(firstIndex), size);
             } else {
-                System.arraycopy(items, 0, newArr, 0, minusOne(firstIndex));
-                System.arraycopy(items, addOne(lastIndex), newArr,
-                        newArr.length - size + lastIndex, size - lastIndex);
-                lastIndex = newArr.length - size + lastIndex;
+                System.arraycopy(items, 0, newArr, 0, lastIndex);
+                System.arraycopy(items, addOne(firstIndex), newArr,
+                        newArr.length - items.length + firstIndex, items.length - firstIndex - 1);
+                firstIndex = newArr.length - items.length + firstIndex - 1;
             }
         }
     }
