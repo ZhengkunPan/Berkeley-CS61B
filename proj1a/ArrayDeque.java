@@ -5,7 +5,9 @@ public class ArrayDeque<T> {
     private int firstIndex;
     private int lastIndex;
 
-    /** Creates an empty array deque.*/
+    /**
+     * Creates an empty array deque.
+     */
     public ArrayDeque() {
         items = (T[]) new Object[8];
         size = 0;
@@ -13,7 +15,9 @@ public class ArrayDeque<T> {
         lastIndex = 5;
     }
 
-    /** Adds an item of type T to the front of the deque.*/
+    /**
+     * Adds an item of type T to the front of the deque.
+     */
     public void addFirst(T item) {
         incSize();
         items[firstIndex] = item;
@@ -21,7 +25,9 @@ public class ArrayDeque<T> {
         size += 1;
     }
 
-    /**  Adds an item of type T to the back of the deque.*/
+    /**
+     * Adds an item of type T to the back of the deque.
+     */
     public void addLast(T item) {
         incSize();
         items[lastIndex] = item;
@@ -29,7 +35,9 @@ public class ArrayDeque<T> {
         size += 1;
     }
 
-    /** Returns true if deque is empty, false otherwise.*/
+    /**
+     * Returns true if deque is empty, false otherwise.
+     */
     public boolean isEmpty() {
         if (size == 0) {
             return true;
@@ -37,12 +45,16 @@ public class ArrayDeque<T> {
         return false;
     }
 
-    /** Returns the number of items in the deque.*/
+    /**
+     * Returns the number of items in the deque.
+     */
     public int size() {
         return size;
     }
 
-    /** Prints the items in the deque from first to last, separated by a space.*/
+    /**
+     * Prints the items in the deque from first to last, separated by a space.
+     */
     public void printDeque() {
         int ptr = 0;
         while (ptr < size) {
@@ -52,8 +64,10 @@ public class ArrayDeque<T> {
         System.out.println("");
     }
 
-    /** Removes and returns the item at the front of the deque.
-     * If no such item exists, returns null.*/
+    /**
+     * Removes and returns the item at the front of the deque.
+     * If no such item exists, returns null.
+     */
     public T removeFirst() {
         if (isEmpty()) {
             return null;
@@ -66,8 +80,10 @@ public class ArrayDeque<T> {
         return firstItem;
     }
 
-    /** Removes and returns the item at the back of the deque.
-     * If no such item exists, returns null.*/
+    /**
+     * Removes and returns the item at the back of the deque.
+     * If no such item exists, returns null.
+     */
     public T removeLast() {
         if (isEmpty()) {
             return null;
@@ -80,12 +96,16 @@ public class ArrayDeque<T> {
         return lastItem;
     }
 
-    /** Gets the item at the given index.*/
+    /**
+     * Gets the item at the given index.
+     */
     public T get(int index) {
         return items[(index + firstIndex + 1) % items.length];
     }
 
-    /** Increases array size.*/
+    /**
+     * Increases array size.
+     */
     private void incSize() {
         if (size == items.length) {
             T[] newArr = (T[]) new Object[size * 4];
@@ -104,7 +124,9 @@ public class ArrayDeque<T> {
         }
     }
 
-    /** Decreases array size*/
+    /**
+     * Decreases array size
+     */
     private void decSize() {
         if (size == 0) {
             items = (T[]) new Object[8];
@@ -127,10 +149,11 @@ public class ArrayDeque<T> {
             }
             items = newArr;
         }
-
     }
 
-    /** Minus one on index.*/
+    /**
+     * Minus one on index.
+     */
     private int minusOne(int index) {
         if (index == 0) {
             return items.length - 1;
@@ -139,30 +162,14 @@ public class ArrayDeque<T> {
         }
     }
 
-    /** Adds one on index.*/
+    /**
+     * Adds one on index.
+     */
     private int addOne(int index) {
         if (index == items.length - 1) {
             return 0;
         } else {
             return index + 1;
         }
-    }
-
-    public static void main(String args[]) {
-        ArrayDeque ArrayDeque1 = new ArrayDeque();
-        ArrayDeque1.addLast(0);
-        ArrayDeque1.addLast(1);
-        ArrayDeque1.addLast(2);
-        ArrayDeque1.get(1);
-        ArrayDeque1.removeLast();
-        ArrayDeque1.removeFirst();
-        ArrayDeque1.removeFirst();
-        ArrayDeque1.addLast(7);
-        ArrayDeque1.get(0);
-        ArrayDeque1.addLast(9);
-        ArrayDeque1.addLast(10);
-        ArrayDeque1.get(2);
-        ArrayDeque1.removeFirst();
-        ArrayDeque1.removeFirst();
     }
 }
