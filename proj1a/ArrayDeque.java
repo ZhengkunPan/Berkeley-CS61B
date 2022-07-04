@@ -55,10 +55,12 @@ public class ArrayDeque<T> {
     /** Removes and returns the item at the front of the deque.
      * If no such item exists, returns null.*/
     public T removeFirst() {
+        if (isEmpty()) {
+            return null;
+        }
         firstIndex = addOne(firstIndex);
-        T firstItem = items[firstIndex + 1];
-        items[firstIndex + 1] = null;
-        firstIndex += 1;
+        T firstItem = items[firstIndex];
+        items[firstIndex] = null;
         size -= 1;
         decSize();
         return firstItem;
@@ -67,10 +69,12 @@ public class ArrayDeque<T> {
     /** Removes and returns the item at the back of the deque.
      * If no such item exists, returns null.*/
     public T removeLast() {
+        if (isEmpty()) {
+            return null;
+        }
         lastIndex = minusOne(lastIndex);
-        T lastItem = items[lastIndex - 1];
-        items[lastIndex - 1] = null;
-        lastIndex -= 1;
+        T lastItem = items[lastIndex];
+        items[lastIndex] = null;
         size -= 1;
         decSize();
         return lastItem;
@@ -90,9 +94,11 @@ public class ArrayDeque<T> {
                         newArr, 0, lastIndex);
                 System.arraycopy(items, lastIndex,
                         newArr, newArr.length - size + lastIndex, size - lastIndex);
-                lastIndex = newArr.length - size + lastIndex - 1;
+                firstIndex = newArr.length - size + lastIndex - 1;
             } else {
                 System.arraycopy(items, addOne(firstIndex), newArr, addOne(firstIndex), size);
+                firstIndex = newArr.length - 1;
+                lastIndex = size;
             }
             items = newArr;
         }
@@ -116,7 +122,7 @@ public class ArrayDeque<T> {
     /** Minus one on index.*/
     private int minusOne(int index) {
         if (index == 0) {
-            return size - 1;
+            return items.length - 1;
         } else {
             return index - 1;
         }
@@ -124,10 +130,25 @@ public class ArrayDeque<T> {
 
     /** Adds one on index.*/
     private int addOne(int index) {
-        if (index == size - 1) {
+        if (index == items.length - 1) {
             return 0;
         } else {
             return index + 1;
         }
+    }
+
+    public static void main(String[] args) {
+        ArrayDeque array = new ArrayDeque();
+        array.addFirst(1);
+        array.addFirst(2);
+        array.addFirst(3);
+        array.addFirst(4);
+        array.addFirst(5);
+        array.addLast(10);
+        array.addLast(10);
+        array.addLast(10);
+        array.addLast(10);
+        array.addLast(10);
+
     }
 }
