@@ -110,7 +110,7 @@ public class LinkedListDeque<T> {
         }
 
         if (index == 0) {
-            return t.item;
+            return t.next.item;
         }
 
         return getRecur(t.next, index - 1);

@@ -15,18 +15,18 @@ public class ArrayDeque<T> {
 
     /** Adds an item of type T to the front of the deque.*/
     public void addFirst(T item) {
+        incSize();
         items[firstIndex] = item;
         firstIndex = minusOne(firstIndex);
         size += 1;
-        incSize();
     }
 
     /**  Adds an item of type T to the back of the deque.*/
     public void addLast(T item) {
+        incSize();
         items[lastIndex] = item;
         lastIndex = addOne(lastIndex);
         size += 1;
-        incSize();
     }
 
     /** Returns true if deque is empty, false otherwise.*/
@@ -82,7 +82,7 @@ public class ArrayDeque<T> {
     }
 
     /** Increases array size.*/
-    public void incSize() {
+    private void incSize() {
         if (size == items.length) {
             T[] newArr = (T[]) new Object[size * 4];
             if (firstIndex - 1 == lastIndex) {
@@ -99,7 +99,7 @@ public class ArrayDeque<T> {
     }
 
     /** Decreases array size*/
-    public void decSize() {
+    private void decSize() {
         if (size <= 0.25) {
             T[] newArr = (T[]) new Object[items.length / 2];
             if (items[0] == null || items[size - 1] == null) {
@@ -114,7 +114,7 @@ public class ArrayDeque<T> {
     }
 
     /** Minus one on index.*/
-    public int minusOne(int index) {
+    private int minusOne(int index) {
         if (index == 0) {
             return size - 1;
         } else {
@@ -123,7 +123,7 @@ public class ArrayDeque<T> {
     }
 
     /** Adds one on index.*/
-    public int addOne(int index) {
+    private int addOne(int index) {
         if (index == size - 1) {
             return 0;
         } else {
