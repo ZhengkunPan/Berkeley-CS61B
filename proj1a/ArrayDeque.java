@@ -116,8 +116,8 @@ public class ArrayDeque<T> {
         if ((float) size / items.length < 0.25) {
             T[] newArr = (T[]) new Object[items.length / 2];
             if (items[0] == null || items[size - 1] == null) {
-                System.arraycopy(items, addOne(firstIndex), newArr, 0, lastIndex - firstIndex - 1);
-                lastIndex = lastIndex - firstIndex - 1;
+                System.arraycopy(items, addOne(firstIndex), newArr, 0, size);
+                lastIndex = size;
                 firstIndex = newArr.length - 1;
             } else {
                 System.arraycopy(items, 0, newArr, 0, lastIndex);
@@ -146,5 +146,23 @@ public class ArrayDeque<T> {
         } else {
             return index + 1;
         }
+    }
+
+    public static void main(String args[]) {
+        ArrayDeque ArrayDeque1 = new ArrayDeque();
+        ArrayDeque1.addLast(0);
+        ArrayDeque1.addLast(1);
+        ArrayDeque1.addLast(2);
+        ArrayDeque1.get(1);
+        ArrayDeque1.removeLast();
+        ArrayDeque1.removeFirst();
+        ArrayDeque1.removeFirst();
+        ArrayDeque1.addLast(7);
+        ArrayDeque1.get(0);
+        ArrayDeque1.addLast(9);
+        ArrayDeque1.addLast(10);
+        ArrayDeque1.get(2);
+        ArrayDeque1.removeFirst();
+        ArrayDeque1.removeFirst();
     }
 }
