@@ -106,6 +106,10 @@ public class ArrayDeque<T> {
 
     /** Decreases array size*/
     private void decSize() {
+        if (size == 0) {
+            new ArrayDeque();
+            return;
+        }
         if (size / items.length < 0.25) {
             T[] newArr = (T[]) new Object[items.length / 2];
             if (items[0] == null || items[size - 1] == null) {
@@ -139,13 +143,5 @@ public class ArrayDeque<T> {
         } else {
             return index + 1;
         }
-    }
-
-    public static void main(String[] args) {
-        ArrayDeque array = new ArrayDeque();
-        array.addFirst(1);
-        array.addFirst(2);
-        array.removeFirst();
-        array.removeFirst();
     }
 }
