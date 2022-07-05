@@ -137,7 +137,7 @@ public class ArrayDeque<T> {
         }
         if ((float) size / items.length < 0.25) {
             T[] newArr = (T[]) new Object[items.length / 2];
-            if (items[0] == null || items[size - 1] == null) {
+            if (items[0] == null || items[items.length - 1] == null) {
                 System.arraycopy(items, addOne(firstIndex), newArr, 0, size);
                 lastIndex = size;
                 firstIndex = newArr.length - 1;
