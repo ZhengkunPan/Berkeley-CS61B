@@ -144,8 +144,8 @@ public class ArrayDeque<T> {
             } else {
                 System.arraycopy(items, 0, newArr, 0, lastIndex);
                 System.arraycopy(items, addOne(firstIndex), newArr,
-                        newArr.length - items.length + firstIndex, items.length - firstIndex - 1);
-                firstIndex = newArr.length - items.length + firstIndex - 1;
+                        newArr.length - items.length + firstIndex + 1, items.length - firstIndex - 1);
+                firstIndex = newArr.length - items.length + firstIndex;
             }
             items = newArr;
         }
