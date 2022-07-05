@@ -17,5 +17,6 @@ public class TestOffByN {
         assertFalse(obn.equalChars('M', 'p'));
 
         assertFalse(obn.equalChars('^', '&'));
+        assertFalse(obn.equalChars('M', 'm'));
     }
 }
