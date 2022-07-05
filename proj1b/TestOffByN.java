@@ -4,19 +4,18 @@ import static org.junit.Assert.*;
 public class TestOffByN {
 
     @Test
-    public void testEqualChars() {
+    public void testOffByNTrue() {
         CharacterComparator obn = new OffByN(2);
+        char a = 'a';
+        char b = 'c';
+        assertTrue(obn.equalChars(a, b));
+    }
 
-        assertTrue(obn.equalChars('a', 'c'));
-        assertFalse(obn.equalChars('p', 'c'));
-
-        assertTrue(obn.equalChars('c', 'a'));
-        assertFalse(obn.equalChars('c', 'p'));
-
-        assertFalse(obn.equalChars('C', 'a'));
-        assertFalse(obn.equalChars('M', 'p'));
-
-        assertFalse(obn.equalChars('^', '&'));
-        assertFalse(obn.equalChars('M', 'm'));
+    @Test
+    public void testOffByNFalse() {
+        CharacterComparator obn = new OffByN(1);
+        char a = '1';
+        char b = '4';
+        assertFalse(obn.equalChars(a, b));
     }
 }

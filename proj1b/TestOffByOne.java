@@ -9,23 +9,44 @@ public class TestOffByOne {
 
     // Your tests go here.
     @Test
-    public void testEqualChars() {
-        OffByOne obo = new OffByOne();
-        assertTrue(obo.equalChars('a', 'b'));
-        assertTrue(obo.equalChars('r', 'q'));
-        assertTrue(obo.equalChars('&', '%'));
+    public void testEqualCharsFalse() {
+        char a = '!';
+        char b = '5';
+        assertFalse(offByOne.equalChars(a, b));
+    }
 
-        assertTrue(obo.equalChars('b', 'a'));
-        assertTrue(obo.equalChars('q', 'r'));
-        assertTrue(obo.equalChars('%', '&'));
+    @Test
+    public void testEqualCharsTrue() {
+        char a = '1';
+        char b = '2';
+        assertTrue(offByOne.equalChars(a, b));
+    }
 
-        assertFalse(obo.equalChars('B', 'a'));
-        assertFalse(obo.equalChars('q', 'R'));
+    @Test
+    public void testEqualCharZero() {
+        char a = ' ';
+        char b = ' ';
+        assertFalse(offByOne.equalChars(a, b));
+    }
 
-        assertFalse(obo.equalChars('a', 'e'));
-        assertFalse(obo.equalChars('z', 'a'));
-        assertFalse(obo.equalChars('a', 'a'));
+    @Test
+    public void testEqualCharDot() {
+        char a = '.';
+        char b = '.';
+        assertFalse(offByOne.equalChars(a, b));
+    }
 
-        assertFalse(obo.equalChars('A', 'a'));
+    @Test
+    public void testEqualCharAlphabet() {
+        char a = 'a';
+        char b = 'b';
+        assertTrue(offByOne.equalChars(a, b));
+    }
+
+    @Test
+    public void testEqualCharUperlower() {
+        char a = 'A';
+        char b = 'b';
+        assertFalse(offByOne.equalChars(a, b));
     }
 }
