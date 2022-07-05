@@ -1,4 +1,4 @@
-public class ArrayDeque<T> {
+public class ArrayDeque<T> implements Deque<T> {
 
     private T[] items;
     private int size;
@@ -18,6 +18,7 @@ public class ArrayDeque<T> {
     /**
      * Adds an item of type T to the front of the deque.
      */
+    @Override
     public void addFirst(T item) {
         incSize();
         items[firstIndex] = item;
@@ -28,6 +29,7 @@ public class ArrayDeque<T> {
     /**
      * Adds an item of type T to the back of the deque.
      */
+    @Override
     public void addLast(T item) {
         incSize();
         items[lastIndex] = item;
@@ -38,6 +40,7 @@ public class ArrayDeque<T> {
     /**
      * Returns true if deque is empty, false otherwise.
      */
+    @Override
     public boolean isEmpty() {
         if (size == 0) {
             return true;
@@ -48,6 +51,7 @@ public class ArrayDeque<T> {
     /**
      * Returns the number of items in the deque.
      */
+    @Override
     public int size() {
         return size;
     }
@@ -68,6 +72,7 @@ public class ArrayDeque<T> {
      * Removes and returns the item at the front of the deque.
      * If no such item exists, returns null.
      */
+    @Override
     public T removeFirst() {
         if (isEmpty()) {
             return null;
@@ -84,6 +89,7 @@ public class ArrayDeque<T> {
      * Removes and returns the item at the back of the deque.
      * If no such item exists, returns null.
      */
+    @Override
     public T removeLast() {
         if (isEmpty()) {
             return null;
@@ -99,6 +105,7 @@ public class ArrayDeque<T> {
     /**
      * Gets the item at the given index.
      */
+    @Override
     public T get(int index) {
         return items[(index + firstIndex + 1) % items.length];
     }
@@ -144,7 +151,8 @@ public class ArrayDeque<T> {
             } else {
                 System.arraycopy(items, 0, newArr, 0, lastIndex);
                 System.arraycopy(items, addOne(firstIndex), newArr,
-                        newArr.length - items.length + firstIndex + 1, items.length - firstIndex - 1);
+                        newArr.length - items.length + firstIndex + 1,
+                        items.length - firstIndex - 1);
                 firstIndex = newArr.length - items.length + firstIndex;
             }
             items = newArr;
